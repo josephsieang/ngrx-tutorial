@@ -1,6 +1,8 @@
 # NgrxCounter
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.1.4.
+- This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.1.4.
+- First NGRX small project to learn the basic flow of Angular NGRX.
+- There are three functions in this project which user can increase, decrease, or reset the counter.
 
 ## Development server
 
