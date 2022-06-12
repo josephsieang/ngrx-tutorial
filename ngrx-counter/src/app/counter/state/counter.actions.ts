@@ -5,3 +5,4 @@ export const decrement = createAction('[CounterState] decrement');
 export const reset = createAction('[CounterState] reset');
 
 export const customIncrement = createAction('[CounterState] custom increment', props<{ value: number }>());
+export const modifyAuthor = createAction('[CounterState] modifyAuthor');

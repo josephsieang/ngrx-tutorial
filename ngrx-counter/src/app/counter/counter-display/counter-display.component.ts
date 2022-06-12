@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { map, Observable, Subject, takeUntil } from 'rxjs';
+import { map, Observable, Subject, takeUntil, tap } from 'rxjs';
 import { CounterState } from '../state/counter.state';
 
 @Component({
@@ -15,7 +15,9 @@ export class CounterDisplayComponent implements OnInit, OnDestroy {
 
   constructor(private store: Store<{ counter: CounterState }>) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.getCounter().subscribe();
+  }
 
   ngOnDestroy(): void {
     this.unsubscription.next();
@@ -24,7 +26,11 @@ export class CounterDisplayComponent implements OnInit, OnDestroy {
 
   getCounter(): Observable<number> {
     return this.store.select('counter').pipe(
-      map((val) => val.counter),
+      tap(() => {
+        console.log('getCounterValue() called');
+      }),
+      map((counter) => counter.counter),
+      tap((count) => (this.count = count)),
       takeUntil(this.unsubscription)
     );
   }
