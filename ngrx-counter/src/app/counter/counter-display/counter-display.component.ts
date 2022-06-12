@@ -11,7 +11,8 @@ import { CounterState } from '../state/counter.state';
   styleUrls: ['./counter-display.component.scss']
 })
 export class CounterDisplayComponent implements OnInit, OnDestroy {
-  count: number = 0;
+  // count: number = 0;
+  count?: Observable<number>;
 
   private unsubscription: Subject<void> = new Subject<void>();
 
@@ -19,6 +20,7 @@ export class CounterDisplayComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     // this.getCounter().subscribe();
+    this.count = this.getCounter();
   }
 
   ngOnDestroy(): void {

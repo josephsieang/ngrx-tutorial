@@ -13,7 +13,8 @@ import { CounterState } from '../state/counter.state';
 })
 export class CustomCounterInputComponent implements OnInit {
   inputVal?: number;
-  author?: string;
+  // author?: string;
+  author?: Observable<string>;
 
   private unsubscription: Subject<void> = new Subject<void>();
 
@@ -21,6 +22,7 @@ export class CustomCounterInputComponent implements OnInit {
 
   ngOnInit(): void {
     // this.getCounterAuthor().subscribe();
+    this.author = this.getCounterAuthor();
   }
 
   ngOnDestroy(): void {

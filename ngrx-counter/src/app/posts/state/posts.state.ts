@@ -10,6 +10,11 @@ export const initialState: PostsState = {
       id: '1',
       title: 'Hello World',
       description: 'Welcome to Ngrx'
+    },
+    {
+      id: '2',
+      title: 'Pro',
+      description: 'You are a pro'
     }
   ]
 };
