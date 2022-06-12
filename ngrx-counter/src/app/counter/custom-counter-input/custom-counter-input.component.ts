@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { map, Observable, Subject, takeUntil, tap } from 'rxjs';
 import { customIncrement, modifyAuthor } from '../state/counter.actions';
+import { getAuthor } from '../state/counter.selectors';
 import { CounterState } from '../state/counter.state';
 
 @Component({
@@ -18,7 +19,7 @@ export class CustomCounterInputComponent implements OnInit {
   constructor(private store: Store<{ counter: CounterState }>) {}
 
   ngOnInit(): void {
-    this.getCounterAuthor().subscribe();
+    // this.getCounterAuthor().subscribe();
   }
 
   ngOnDestroy(): void {
@@ -37,13 +38,21 @@ export class CustomCounterInputComponent implements OnInit {
   }
 
   getCounterAuthor(): Observable<string> {
-    return this.store.select('counter').pipe(
-      tap(() => {
-        console.log('getCounterAuthor() called');
-      }),
-      map((counter) => counter.author),
-      tap((author) => (this.author = author)),
-      takeUntil(this.unsubscription)
-    );
+    // return this.store.select('counter').pipe(
+    //   tap(() => {
+    //     console.log('getCounterAuthor() called');
+    //   }),
+    //   map((counter) => counter.author),
+    //   tap((author) => (this.author = author)),
+    //   takeUntil(this.unsubscription)
+    // );
+    return this.store.select(getAuthor);
+    // .pipe(
+    //   takeUntil(this.unsubscription),
+    //   tap(() => {
+    //     console.log('getCounterAuthor() called');
+    //   }),
+    //   tap((author) => (this.author = author))
+    // );
   }
 }
