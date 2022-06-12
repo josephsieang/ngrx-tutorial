@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { map, Observable, Subject, takeUntil, tap } from 'rxjs';
+import { AppState } from 'src/app/store/app.state';
 import { customIncrement, modifyAuthor } from '../state/counter.actions';
 import { getAuthor } from '../state/counter.selectors';
 import { CounterState } from '../state/counter.state';
@@ -16,7 +17,7 @@ export class CustomCounterInputComponent implements OnInit {
 
   private unsubscription: Subject<void> = new Subject<void>();
 
-  constructor(private store: Store<{ counter: CounterState }>) {}
+  constructor(private store: Store<AppState>) {}
 
   ngOnInit(): void {
     // this.getCounterAuthor().subscribe();
