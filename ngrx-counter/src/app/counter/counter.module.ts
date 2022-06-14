@@ -6,6 +6,9 @@ import { CounterButtonsComponent } from './counter-buttons/counter-buttons.compo
 import { CounterDisplayComponent } from './counter-display/counter-display.component';
 import { CustomCounterInputComponent } from './custom-counter-input/custom-counter-input.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { StoreModule } from '@ngrx/store';
+import { COUNTER_STATE_NAME } from './state/counter.selectors';
+import { counterReducer } from './state/counter.reducers';
 
 const routes: Routes = [
   {
@@ -16,6 +19,12 @@ const routes: Routes = [
 
 @NgModule({
   declarations: [CounterComponent, CounterDisplayComponent, CounterButtonsComponent, CustomCounterInputComponent],
-  imports: [CommonModule, RouterModule.forChild(routes), ReactiveFormsModule, FormsModule]
+  imports: [
+    CommonModule,
+    RouterModule.forChild(routes),
+    ReactiveFormsModule,
+    FormsModule,
+    StoreModule.forFeature(COUNTER_STATE_NAME, counterReducer)
+  ]
 })
 export class CounterModule {}
