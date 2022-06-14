@@ -2,10 +2,7 @@
   <div class="col-8">
     <h3>Posts List</h3>
 
-    <button
-      class="btn btn-primary"
-      [routerLink]="['/posts/add']"
-    >Open add post panel</button>
+    <button class="btn btn-primary" [routerLink]="['/posts/add']">Open add post panel</button>
 
     <table class="table table-striped">
       <thead>
@@ -13,6 +10,7 @@
           <th>Id</th>
           <th>Title</th>
           <th>Description</th>
+          <th>Actions</th>
         </tr>
       </thead>
       <tbody>
@@ -20,6 +18,9 @@
           <td>{{ post.id }}</td>
           <td>{{ post.title }}</td>
           <td>{{ post.description }}</td>
+          <td>
+            <button class="btn btn-primary" [routerLink]="['edit', post.id]">Update</button>
+          </td>
         </tr>
       </tbody>
     </table>

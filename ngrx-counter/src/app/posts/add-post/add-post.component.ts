@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { Post } from 'src/app/models/post';
 import { AppState } from 'src/app/store/app.state';
+import { showFormFieldError } from 'src/app/utilities/form';
 import { addPost } from '../state/posts.actions';
 
 @Component({
@@ -29,8 +30,7 @@ export class AddPostComponent implements OnInit {
   }
 
   showFormFieldError(formControlName: string, error: string): boolean {
-    const control = this.postForm.get(formControlName);
-    return control?.touched && control?.errors?.[error];
+    return showFormFieldError(this.postForm, formControlName, error);
   }
 
   private initPostForm(): void {
