@@ -8,6 +8,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { StoreModule } from '@ngrx/store';
 import { POSTS_STATE_NAME } from './state/posts.selectors';
 import { counterReducer } from '../counter/state/counter.reducers';
+import { postsReducer } from './state/posts.reducers';
 
 const routes: Routes = [
   {
@@ -28,6 +29,6 @@ const routes: Routes = [
 
 @NgModule({
   declarations: [PostListComponent, AddPostComponent, EditPostComponent],
-  imports: [CommonModule, RouterModule.forChild(routes), ReactiveFormsModule, StoreModule.forFeature(POSTS_STATE_NAME, counterReducer)]
+  imports: [CommonModule, RouterModule.forChild(routes), ReactiveFormsModule, StoreModule.forFeature(POSTS_STATE_NAME, postsReducer)]
 })
 export class PostsModule {}

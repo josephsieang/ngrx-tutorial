@@ -1,13 +1,13 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { Observable, mergeMap, tap, Subject, takeUntil } from 'rxjs';
+import { Observable, Subject, takeUntil, tap } from 'rxjs';
 import { Post } from 'src/app/models/post';
-import { AppState } from 'src/app/store/app.state';
 import { showFormFieldError } from 'src/app/utilities/form';
-import { addPost, updatePost } from '../state/posts.actions';
+import { updatePost } from '../state/posts.actions';
 import { getPostById } from '../state/posts.selectors';
+import { PostsState } from '../state/posts.state';
 
 @Component({
   selector: 'app-edit-post',
@@ -20,7 +20,7 @@ export class EditPostComponent implements OnInit, OnDestroy {
 
   private unsubscription: Subject<void> = new Subject<void>();
 
-  constructor(private route: ActivatedRoute, private store: Store<AppState>, private router: Router) {}
+  constructor(private route: ActivatedRoute, private store: Store<PostsState>, private router: Router) {}
 
   ngOnInit(): void {
     this.initPostForm();

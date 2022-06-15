@@ -1,7 +1,6 @@
-import { counterReducer } from '../counter/state/counter.reducers';
-import { postsReducer } from '../posts/state/posts.reducers';
+import { sharedReducer } from './shared/shared.reducers';
+import * as sharedSelectors from './shared/shared.selectors';
 
 export const appReducer = {
-  counter: counterReducer,
-  posts: postsReducer
+  [sharedSelectors.SHARED_STATE_NAME]: sharedReducer
 };

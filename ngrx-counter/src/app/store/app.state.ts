@@ -1,7 +1,6 @@
-import { CounterState } from '../counter/state/counter.state';
-import { PostsState } from '../posts/state/posts.state';
+import * as sharedSelectors from './shared/shared.selectors';
+import { SharedState } from './shared/shared.state';
 
 export interface AppState {
-  counter: CounterState;
-  posts: PostsState;
+  [sharedSelectors.SHARED_STATE_NAME]: SharedState;
 }
