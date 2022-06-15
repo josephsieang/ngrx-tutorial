@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Store } from '@ngrx/store';
+import { AppState } from 'src/app/store/app.state';
 import { showFormFieldError } from 'src/app/utilities/form';
+import { loginStart } from '../state/auth.actions';
 
 @Component({
   selector: 'app-login',
@@ -10,7 +13,7 @@ import { showFormFieldError } from 'src/app/utilities/form';
 export class LoginComponent implements OnInit {
   loginForm!: FormGroup;
 
-  constructor() {}
+  constructor(private store: Store<AppState>) {}
 
   ngOnInit(): void {
     this.initLoginForm();
@@ -27,5 +30,9 @@ export class LoginComponent implements OnInit {
     return showFormFieldError(this.loginForm, formControlName, error);
   }
 
-  onLogin(): void {}
+  onLogin(): void {
+    const loginFormVal = this.loginForm.getRawValue();
+
+    this.store.dispatch(loginStart(loginFormVal));
+  }
 }
