@@ -7,7 +7,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
 import { StoreModule } from '@ngrx/store';
 import { POSTS_STATE_NAME } from './state/posts.selectors';
-import { counterReducer } from '../counter/state/counter.reducers';
 import { postsReducer } from './state/posts.reducers';
 
 const routes: Routes = [
