@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { Post } from 'src/app/models/post';
-import { deletePost } from '../state/posts.actions';
+import { deletePost, loadPosts } from '../state/posts.actions';
 import { getPosts } from '../state/posts.selectors';
 import { PostsState } from '../state/posts.state';
 
@@ -18,6 +18,7 @@ export class PostListComponent implements OnInit {
 
   ngOnInit(): void {
     this.posts = this.getPosts();
+    this.store.dispatch(loadPosts());
   }
 
   getPosts(): Observable<Post[]> {
