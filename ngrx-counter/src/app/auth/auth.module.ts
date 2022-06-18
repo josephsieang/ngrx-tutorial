@@ -1,29 +1,12 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './login/login.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import { EffectsModule } from '@ngrx/effects';
-import { AuthEffects } from './state/auth.effects';
-
-const routes: Routes = [
-  {
-    path: '',
-    children: [
-      {
-        path: '',
-        redirectTo: 'login'
-      },
-      {
-        path: 'login',
-        component: LoginComponent
-      }
-    ]
-  }
-];
+import { AuthRoutingModule } from './auth-routing.module';
+import { SignUpComponent } from './sign-up/sign-up.component';
 
 @NgModule({
-  declarations: [LoginComponent],
-  imports: [CommonModule, RouterModule.forChild(routes), ReactiveFormsModule, EffectsModule.forFeature([AuthEffects])]
+  declarations: [LoginComponent, SignUpComponent],
+  imports: [CommonModule, AuthRoutingModule, ReactiveFormsModule]
 })
 export class AuthModule {}

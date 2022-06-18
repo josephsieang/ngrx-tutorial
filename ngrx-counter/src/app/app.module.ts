@@ -12,6 +12,7 @@ import { environment } from 'src/environments/environment';
 import { EffectsModule } from '@ngrx/effects';
 import { LoadingSpinnerComponent } from './loading-spinner/loading-spinner.component';
 import { appReducer } from './store/app.reducer';
+import { AuthEffects } from './auth/state/auth.effects';
 
 @NgModule({
   declarations: [AppComponent, HomeComponent, HeaderComponent, LoadingSpinnerComponent],
@@ -20,7 +21,7 @@ import { appReducer } from './store/app.reducer';
     AppRoutingModule,
     HttpClientModule,
     StoreModule.forRoot(appReducer),
-    EffectsModule.forRoot([]),
+    EffectsModule.forRoot([AuthEffects]),
     StoreDevtoolsModule.instrument({
       logOnly: environment.production
     })
