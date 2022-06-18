@@ -10,10 +10,14 @@ export const SIGNUP_SUCCESS = '[AuthState] sign up success';
 
 export const AUTO_LOGIN = '[AuthState] auto login';
 
+export const LOGOUT = '[AuthState] log out';
+
 export const loginStart = createAction(LOGIN_START, props<{ email: string; password: string }>());
-export const loginSuccess = createAction(LOGIN_SUCCESS, props<{ user: User }>());
+export const loginSuccess = createAction(LOGIN_SUCCESS, props<{ user: User; redirect: boolean }>());
 
 export const signUpStart = createAction(SIGNUP_START, props<{ email: string; password: string }>());
-export const signUpSuccess = createAction(SIGNUP_SUCCESS, props<{ user: User }>());
+export const signUpSuccess = createAction(SIGNUP_SUCCESS, props<{ user: User; redirect: boolean }>());
 
 export const autoLogin = createAction(AUTO_LOGIN);
+
+export const logout = createAction(LOGOUT);

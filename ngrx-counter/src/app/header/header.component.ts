@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
+import { logout } from '../auth/state/auth.actions';
 import { isAuthenticated } from '../auth/state/auth.selectors';
 import { AppState } from '../store/app.state';
 
@@ -16,5 +17,9 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit(): void {
     this.isAuthenticated$ = this.store.select(isAuthenticated);
+  }
+
+  onLogout(): void {
+    this.store.dispatch(logout());
   }
 }

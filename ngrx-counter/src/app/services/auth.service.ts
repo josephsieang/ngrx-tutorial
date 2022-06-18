@@ -1,7 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { logout } from '../auth/state/auth.actions';
+import { AuthState } from '../auth/state/auth.state';
 import { AuthResponseData } from '../models/auth-response-data';
 import { User } from '../models/user';
 
@@ -13,7 +16,7 @@ export class AuthService {
 
   private readonly USER_DATA = 'USER_DATA';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private store: Store<AuthState>) {}
 
   login(email: string, password: string): Observable<AuthResponseData> {
     return this.http.post<AuthResponseData>(
@@ -76,11 +79,21 @@ export class AuthService {
     return null;
   }
 
+  logout(): void {
+    localStorage.removeItem(this.USER_DATA);
+    if (this.timeoutInterval) {
+      clearTimeout(this.timeoutInterval);
+      this.timeoutInterval = null;
+    }
+  }
+
   private runTimeoutInterval(user: User): void {
     const todayDate = new Date().getTime();
     const expirationDate = user.expireDate.getTime();
     const timeInterval = expirationDate - todayDate;
 
-    this.timeoutInterval = setTimeout(() => {}, timeInterval);
+    this.timeoutInterval = setTimeout(() => {
+      this.store.dispatch(logout());
+    }, timeInterval);
   }
 }
