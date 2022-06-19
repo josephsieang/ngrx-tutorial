@@ -26,4 +26,14 @@ export class PostsService {
   addPost(post: Post): Observable<{ name: string }> {
     return this.http.post<{ name: string }>('https://vue-completecourse.firebaseio.com/posts.json', post);
   }
+
+  editPost(post: Post) {
+    const postData = {
+      [post.id]: {
+        title: post.title,
+        description: post.description
+      }
+    };
+    return this.http.patch('https://vue-completecourse.firebaseio.com/posts.json', postData);
+  }
 }
