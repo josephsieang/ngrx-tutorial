@@ -23,6 +23,10 @@ export class PostsService {
     );
   }
 
+  getPostById(id: string): Observable<Post> {
+    return this.http.get<Post>(`https://ngrx-counter-d5f2c-default-rtdb.firebaseio.com/posts/${id}.json`);
+  }
+
   addPost(post: Post): Observable<{ name: string }> {
     return this.http.post<{ name: string }>('https://ngrx-counter-d5f2c-default-rtdb.firebaseio.com/posts.json', post);
   }

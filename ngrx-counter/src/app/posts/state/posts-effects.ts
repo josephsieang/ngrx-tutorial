@@ -1,8 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { map, mergeMap, switchMap, tap } from 'rxjs';
+import { RouterNavigationAction, ROUTER_NAVIGATION } from '@ngrx/router-store';
+import { filter, map, mergeMap, switchMap, tap } from 'rxjs';
+import { Post } from 'src/app/models/post';
 import { PostsService } from 'src/app/services/posts.service';
+import { RouterStateUrl } from 'src/app/store/router/custom-serializer';
 import {
   addPost,
   addPostSuccess,
@@ -80,6 +83,26 @@ export class PostsEffects {
           })
         );
       })
+    );
+  });
+
+  getSinglePost$ = createEffect(() => {
+    return this.action$.pipe(
+      ofType(ROUTER_NAVIGATION),
+      filter((action: RouterNavigationAction<RouterStateUrl>) => {
+        return action.payload.routerState.url.startsWith('/posts/detail');
+      }),
+      map((action) => {
+        return action.payload.routerState.params['id'];
+      }),
+      switchMap((id: string) =>
+        this.postsService.getPostById(id).pipe(
+          map((post) => {
+            const postWithId: Post = { ...post, id };
+            return loadPostsSuccess({ posts: [postWithId] });
+          })
+        )
+      )
     );
   });
 }
