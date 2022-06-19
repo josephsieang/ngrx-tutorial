@@ -15,6 +15,7 @@ import { appReducer } from './store/app.reducer';
 import { AuthEffects } from './auth/state/auth.effects';
 import { AuthTokenInterceptor } from './interceptors/auth-token.interceptor';
 import { StoreRouterConnectingModule } from '@ngrx/router-store';
+import { CustomSerializer } from './store/router/custom-serializer';
 
 @NgModule({
   declarations: [AppComponent, HomeComponent, HeaderComponent, LoadingSpinnerComponent],
@@ -27,7 +28,7 @@ import { StoreRouterConnectingModule } from '@ngrx/router-store';
     StoreDevtoolsModule.instrument({
       logOnly: environment.production
     }),
-    StoreRouterConnectingModule.forRoot()
+    StoreRouterConnectingModule.forRoot({ serializer: CustomSerializer })
   ],
   providers: [
     {
