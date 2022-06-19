@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
 import { Post } from '../models/post';
@@ -35,5 +35,9 @@ export class PostsService {
       }
     };
     return this.http.patch('https://vue-completecourse.firebaseio.com/posts.json', postData);
+  }
+
+  deletePost(id: string) {
+    return this.http.delete(`https://vue-completecourse.firebaseio.com/posts/${id}.json`);
   }
 }
