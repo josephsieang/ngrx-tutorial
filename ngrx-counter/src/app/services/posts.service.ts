@@ -10,7 +10,7 @@ export class PostsService {
   constructor(private http: HttpClient) {}
 
   getPosts(): Observable<Post[]> {
-    return this.http.get<Post[]>('https://vue-completecourse.firebaseio.com/posts.json').pipe(
+    return this.http.get<Post[]>('https://ngrx-counter-d5f2c-default-rtdb.firebaseio.com/posts.json').pipe(
       map((data) => {
         const posts: Post[] = [];
 
@@ -24,7 +24,7 @@ export class PostsService {
   }
 
   addPost(post: Post): Observable<{ name: string }> {
-    return this.http.post<{ name: string }>('https://vue-completecourse.firebaseio.com/posts.json', post);
+    return this.http.post<{ name: string }>('https://ngrx-counter-d5f2c-default-rtdb.firebaseio.com/posts.json', post);
   }
 
   editPost(post: Post) {
@@ -34,10 +34,10 @@ export class PostsService {
         description: post.description
       }
     };
-    return this.http.patch('https://vue-completecourse.firebaseio.com/posts.json', postData);
+    return this.http.patch('https://ngrx-counter-d5f2c-default-rtdb.firebaseio.com/posts.json', postData);
   }
 
   deletePost(id: string) {
-    return this.http.delete(`https://vue-completecourse.firebaseio.com/posts/${id}.json`);
+    return this.http.delete(`https://ngrx-counter-d5f2c-default-rtdb.firebaseio.com/posts/${id}.json`);
   }
 }
