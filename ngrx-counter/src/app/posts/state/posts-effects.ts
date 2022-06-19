@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { map, mergeMap, switchMap } from 'rxjs';
+import { map, mergeMap, switchMap, tap } from 'rxjs';
 import { PostsService } from 'src/app/services/posts.service';
 import {
   addPost,
@@ -15,7 +16,7 @@ import {
 
 @Injectable()
 export class PostsEffects {
-  constructor(private action$: Actions, private postsService: PostsService) {}
+  constructor(private action$: Actions, private postsService: PostsService, private router: Router) {}
 
   loadPosts$ = createEffect(() => {
     return this.action$.pipe(
@@ -56,6 +57,18 @@ export class PostsEffects {
       })
     );
   });
+
+  editPostSuccess$ = createEffect(
+    () => {
+      return this.action$.pipe(
+        ofType(updatePostSuccess),
+        tap(() => {
+          this.router.navigate(['/posts']);
+        })
+      );
+    },
+    { dispatch: false }
+  );
 
   deletePost$ = createEffect(() => {
     return this.action$.pipe(

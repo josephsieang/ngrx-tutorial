@@ -12,14 +12,6 @@ export const postsReducer = createReducer(
       posts: [...state.posts, post]
     };
   }),
-  on(updatePost, (state, action) => {
-    const updatedPosts = state.posts.map((post) => (action.post.id === post.id ? action.post : post));
-
-    return {
-      ...state,
-      posts: updatedPosts
-    };
-  }),
   on(deletePostSuccess, (state, { id }) => {
     const updatedPosts = state.posts.filter((post) => post.id !== id);
 
