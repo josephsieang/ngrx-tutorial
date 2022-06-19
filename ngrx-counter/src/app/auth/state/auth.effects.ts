@@ -18,14 +18,15 @@ export class AuthEffects {
       exhaustMap((action) => {
         this.store.dispatch(setLoadingSpinner({ status: true }));
         return this.authService.login(action.email, action.password).pipe(
-          finalize(() => this.store.dispatch(setLoadingSpinner({ status: false }))),
           map((data) => {
             const user = this.authService.formatUser(data);
             this.authService.setUserInLocalStorage(user);
+            this.store.dispatch(setLoadingSpinner({ status: false }));
             return loginSuccess({ user, redirect: true });
           }),
           catchError((err) => {
             const errMsg = this.authService.getErrorMessage(err.error.error.message);
+            this.store.dispatch(setLoadingSpinner({ status: false }));
             return of(setErrorMessage({ message: errMsg }));
           })
         );
@@ -56,14 +57,15 @@ export class AuthEffects {
         this.store.dispatch(setLoadingSpinner({ status: true }));
         const { email, password } = action;
         return this.authService.signUp(email, password).pipe(
-          finalize(() => this.store.dispatch(setLoadingSpinner({ status: false }))),
           map((data) => {
             const user = this.authService.formatUser(data);
             this.authService.setUserInLocalStorage(user);
+            this.store.dispatch(setLoadingSpinner({ status: false }));
             return signUpSuccess({ user, redirect: true });
           }),
           catchError((err) => {
             const errMsg = this.authService.getErrorMessage(err.error.error.message);
+            this.store.dispatch(setLoadingSpinner({ status: false }));
             return of(setErrorMessage({ message: errMsg }));
           })
         );
