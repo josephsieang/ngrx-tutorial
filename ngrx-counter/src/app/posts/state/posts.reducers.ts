@@ -4,8 +4,18 @@ import { initialState, postsAdapter } from './posts.state';
 
 export const postsReducer = createReducer(
   initialState,
-  on(addPostSuccess, (state, action) => postsAdapter.addOne(action.post, state)),
+  on(addPostSuccess, (state, action) =>
+    postsAdapter.addOne(action.post, {
+      ...state,
+      count: state.count + 1
+    })
+  ),
   on(deletePostSuccess, (state, { id }) => postsAdapter.removeOne(id, state)),
-  on(loadPostsSuccess, (state, action) => postsAdapter.setAll(action.posts, state)),
+  on(loadPostsSuccess, (state, action) =>
+    postsAdapter.setAll(action.posts, {
+      ...state,
+      count: state.count + 1
+    })
+  ),
   on(updatePostSuccess, (state, action) => postsAdapter.updateOne(action.post, state))
 );
